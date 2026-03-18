@@ -1,15 +1,41 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
+# Built outputs
 /build
+app/build
+**/build/
 /captures
+
+# Gradle
+.gradle
+gradle-wrapper.jar
+
+# Local SDK / machine-specific properties
+local.properties
+
+# Android Keystore signing files (never commit these)
+*.jks
+*.keystore
+keystore.properties
+signing.properties
+
+# IntelliJ / Android Studio IDE files
+.idea/
+*.iml
+
+# Kotlin compiler output
+.kotlin/
+
+# Native build
 .externalNativeBuild
 .cxx
-local.properties
+
+# macOS
+.DS_Store
+
+# Google Services (Firebase config — contains project ID / API key)
+google-services.json
+GoogleService-Info.plist
+
+# Secrets / environment files
+.env
+.env.*
+secrets.properties
