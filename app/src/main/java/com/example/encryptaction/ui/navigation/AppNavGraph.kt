@@ -8,6 +8,7 @@ import com.example.encryptaction.domain.model.UserRole
 import com.example.encryptaction.ui.screen.admin.AdminScreen
 import com.example.encryptaction.ui.screen.auth.LoginScreen
 import com.example.encryptaction.ui.screen.auth.RegisterScreen
+import com.example.encryptaction.ui.screen.decrypt.DecryptScreen
 import com.example.encryptaction.ui.screen.encrypt.EncryptScreen
 import com.example.encryptaction.ui.screen.files.FilesScreen
 import com.example.encryptaction.ui.screen.keys.KeysScreen
@@ -55,6 +56,10 @@ fun AppNavGraph(
 
         composable(NavRoutes.Encrypt.route) {
             EncryptScreen(navController = navController, onProfileClick = onProfileClick)
+        }
+
+        composable(NavRoutes.Decrypt.route) {
+            DecryptScreen(navController = navController, onProfileClick = onProfileClick)
         }
 
         composable(NavRoutes.Sign.route) {

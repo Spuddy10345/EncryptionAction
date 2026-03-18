@@ -57,7 +57,7 @@ class KeyStoreManager @Inject constructor() {
                 )
             )
             .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_OAEP)
-            .setDigests(KeyProperties.DIGEST_SHA256, KeyProperties.DIGEST_SHA512)
+            .setDigests(KeyProperties.DIGEST_SHA256, KeyProperties.DIGEST_SHA512, KeyProperties.DIGEST_SHA1)
             .setUserAuthenticationRequired(false)
             .build()
 

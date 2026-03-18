@@ -73,11 +73,13 @@ class DecryptFileUseCase @Inject constructor(
             ?: return CryptoResult.Failure(CryptoError.KeyNotFound("Failed to decode sender's signing public key"))
 
         // 5. Verify + Decrypt
-        val decrypted = hybridCrypto.verifyAndDecrypt(
+        val hybridResult = hybridCrypto.verifyAndDecrypt(
             packageBytes = packageBytes,
             recipientDecryptionPrivKey = recipientPrivKey,
             senderSigningPublicKey = senderSignPublicKey
-        ).getOrNull() ?: return CryptoResult.Failure(CryptoError.DecryptionFailed("Decryption or verification failed"))
+        )
+        if (hybridResult is CryptoResult.Failure) return hybridResult
+        val decrypted = (hybridResult as CryptoResult.Success).data
 
         // 6. Verify plaintext hash matches stored record
         val actualHash = MessageDigest.getInstance("SHA-256").digest(decrypted.plaintext)

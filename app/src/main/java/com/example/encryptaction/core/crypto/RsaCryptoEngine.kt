@@ -21,7 +21,7 @@ class RsaCryptoEngine @Inject constructor() {
     private val oaepSpec = OAEPParameterSpec(
         "SHA-256",
         "MGF1",
-        MGF1ParameterSpec.SHA256,
+        MGF1ParameterSpec.SHA1,
         PSource.PSpecified.DEFAULT
     )
 

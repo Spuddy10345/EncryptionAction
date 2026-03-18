@@ -9,6 +9,7 @@ sealed class NavRoutes(val route: String) {
     // Main bottom-nav destinations
     object Files : NavRoutes("files")
     object Encrypt : NavRoutes("encrypt")
+    object Decrypt : NavRoutes("decrypt")
     object Sign : NavRoutes("sign")
     object Keys : NavRoutes("keys")
     object Admin : NavRoutes("admin")
