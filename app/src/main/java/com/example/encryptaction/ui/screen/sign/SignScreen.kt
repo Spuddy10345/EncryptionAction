@@ -48,13 +48,14 @@ fun SignScreen(
     val state by viewModel.uiState.collectAsState()
     var selectedTab by remember { mutableIntStateOf(0) }
 
-    val filePickerForSign = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+    // Using OpenDocument for better compatibility with Google Drive and local storage
+    val filePickerForSign = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         uri?.let { viewModel.onSignFilePicked(it) }
     }
-    val filePickerForVerify = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+    val filePickerForVerify = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         uri?.let { viewModel.onVerifyFilePicked(it) }
     }
-    val sigFilePicker = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+    val sigFilePicker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         uri?.let { viewModel.onVerifySigFilePicked(it) }
     }
 
@@ -91,15 +92,15 @@ fun SignScreen(
                 when (selectedTab) {
                     0 -> SignTab(
                         fileName = state.signFileName,
-                        onPickFile = { filePickerForSign.launch("*/*") },
+                        onPickFile = { filePickerForSign.launch(arrayOf("*/*")) },
                         onSign = { viewModel.sign() },
                         isLoading = state.isLoading
                     )
                     1 -> VerifyTab(
                         fileName = state.verifyFileName,
                         sigFileName = state.verifySigFileName,
-                        onPickFile = { filePickerForVerify.launch("*/*") },
-                        onPickSig = { sigFilePicker.launch("*/*") },
+                        onPickFile = { filePickerForVerify.launch(arrayOf("*/*")) },
+                        onPickSig = { sigFilePicker.launch(arrayOf("*/*")) },
                         onVerify = { viewModel.verify() },
                         isLoading = state.isLoading
                     )

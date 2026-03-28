@@ -54,8 +54,9 @@ fun EncryptScreen(
 
     var recipientDropdownExpanded by remember { mutableStateOf(false) }
 
+    // Using OpenDocument for better compatibility with Google Drive and local storage
     val filePicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+        contract = ActivityResultContracts.OpenDocument()
     ) { uri ->
         uri ?: return@rememberLauncherForActivityResult
         val name = uri.resolveDisplayName(context) ?: "unknown"
@@ -93,7 +94,7 @@ fun EncryptScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Button(
-                    onClick = { filePicker.launch("*/*") },
+                    onClick = { filePicker.launch(arrayOf("*/*")) },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(state.selectedFileName ?: "Select File")

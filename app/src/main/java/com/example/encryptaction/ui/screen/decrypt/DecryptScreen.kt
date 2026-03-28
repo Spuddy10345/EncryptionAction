@@ -64,8 +64,9 @@ fun DecryptScreen(
     val state by viewModel.uiState.collectAsState()
     val context = LocalContext.current
 
+    // Using OpenDocument for better compatibility with Google Drive and local storage
     val filePicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
+        contract = ActivityResultContracts.OpenDocument()
     ) { uri ->
         uri ?: return@rememberLauncherForActivityResult
         val name = uri.resolveDisplayName(context) ?: "unknown"
@@ -104,7 +105,7 @@ fun DecryptScreen(
                 )
 
                 Button(
-                    onClick = { filePicker.launch("*/*") },
+                    onClick = { filePicker.launch(arrayOf("*/*")) },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(state.selectedFileName ?: "Select .eaep File")
@@ -369,7 +370,7 @@ private fun CopyableInfoRow(
                 modifier = Modifier.weight(1f)
             )
             IconButton(
-                onClick = onCopy,
+                onClick = { onCopy() },
                 modifier = Modifier.size(36.dp)
             ) {
                 Icon(
